@@ -61,6 +61,13 @@ def make_move(board, position, player):
     return board
 
 
+def unmove(board, position, player=None):
+
+    if (isvacant(board, position)):
+        raise Exception(f"Vacant position {position}")
+    board[position] = 0
+    return board
+
 # make_move(board, 0, 1)
 
 # %%
