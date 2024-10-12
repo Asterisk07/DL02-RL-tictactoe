@@ -1,5 +1,6 @@
 # %%
 import numpy as np
+import random
 
 # %%
 # Hyperparameters
@@ -139,7 +140,8 @@ def play_game(agent1=None, agent2=None):
             player_symbol = 'O'
 
         if agent:  # If there is an agent, it selects a move
-            move = agent.select_move(board)  # Bot selects move
+            move = agent.select_move(
+                board, available_moves)  # Bot selects move
             print(f"Bot ({player_symbol}) selects move: {move}")
         else:  # If no agent, ask for human input
             # Adjust for N size
@@ -157,6 +159,7 @@ def play_game(agent1=None, agent2=None):
                     print("It's a draw!")
                 else:
                     print(f"Player {winner} wins!")
+                return winner
         else:
             print("Invalid move, please try again.")
 
@@ -165,6 +168,21 @@ def play_game(agent1=None, agent2=None):
         current_player = 3 - current_player
 
 
+def random_move(board, available_moves):
+    # return np.random.choice(available_moves)
+    return random.choice(available_moves)
+
+    # Logic for random move
+
+
+def find_winning_move(board, available_moves, player_number):
+    for move in available_moves:
+        board[move] = player_number
+        winner = check_winner(board)
+        board[move] = 0
+        if winner == player_number:
+            return move
+    return -1
 # %%
 # play_game()
 
